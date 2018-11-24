@@ -14,6 +14,9 @@ class Index extends Controller
     	$index3 = db('index3')->where('id',1)->find();
         $index4 = db('index4')->select();
         $index5 = db('index5')->select();
+        $index6 = db('index6')->select();
+        $index7 = db('index7')->find();
+        $index8 = db('index8')->find();
     	//基本信息
     	$this->assign("webtitle",$webinfo->webtitle);
     	$this->assign("webkeywords",$webinfo->webkeywords);
@@ -27,6 +30,9 @@ class Index extends Controller
     	$this->assign("banner4",$index3['banner4']);
         $this->assign("index4",$index4);
         $this->assign("index5",$index5);
+        $this->assign("index6",$index6);
+        $this->assign("index7",$index7);
+        $this->assign("index8",$index8);
         return view();
     }
 }

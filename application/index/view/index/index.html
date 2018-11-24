@@ -365,114 +365,19 @@
               </div>
                 <div class="jiuye" id="xst">
                     <table class="jiuyetb" border="0" cellspacing="0" cellpadding="0">
+                      <?php $num = 1; ?>
+                      {foreach $index6 as $key=>$vo }
+                        <?php $num++;$a=$num%2 ?>
                         <tbody>
-                            <tr class="tr1">
-                                <td width="120">张*才</td>
-                                <td width="120">本科</td>
-                                <td width="240">机器人方案工程师</td>
-                                <td width="360">上海沃迪智能装备</td>
-                                <td width="160">12000</td>
+                            <tr class="tr{$a}">
+                                <td width="120">{$vo.name}</td>
+                                <td width="120">{$vo.education}</td>
+                                <td width="240">{$vo.job}</td>
+                                <td width="360">{$vo.business}</td>
+                                <td width="160">{$vo.wages}</td>
                             </tr>
                         </tbody>
-                        <tbody>
-                            <tr class="tr1">
-                                <td width="120">吕*榜</td>
-                                <td width="120">本科</td>
-                                <td width="240">PLC工程师</td>
-                                <td width="360">浙江正泰电器</td>
-                                <td width="160">8000</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="tr1">
-                                <td width="120">吕*达</td> 
-                                <td width="120">高中</td>
-                                <td width="240">PLC工程师</td>
-                                <td width="360">浙江合川股份</td>
-                                <td width="160">7500</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="tr2">
-                                <td width="120">吴*栋</td>              
-                                <td width="120">专科</td>
-                                <td width="240">视觉工程师</td>
-                                <td width="360">上海欢颜机器人 </td>
-                                <td width="160">8000</td>
-                            </tr>
-                        </tbody>
-                         <tbody>
-                            <tr class="tr1">
-                                <td width="120">吴*梁</td>                                
-                                <td width="120">硕士</td>
-                                <td width="240">项目经理</td>
-                                <td width="360">无锡信捷电气</td>
-                                <td width="160">10000</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="tr2">
-                                <td width="120">吴*功</td>                       
-                                <td width="120">本科</td>
-                                <td width="240">机器人调试工程师</td>
-                                <td width="360">浙江吉利汽车</td>
-                                <td width="160">7500</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="tr1">
-                                <td width="120">李*江</td>                              
-                                <td width="120">高中</td>
-                                <td width="240">PLC工程师</td>
-                                <td width="360">苏州中达电通</td>
-                                <td width="160">6500</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="tr2">
-                                <td width="120">张*山</td>                    
-                                <td width="120">本科</td>
-                                <td width="240">机器人研发工程师</td>
-                                <td width="360">上海上汽大众汽车</td>
-                                <td width="160">9500</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="tr1">
-                                <td width="120">王*</td>                                
-                                <td width="120">博士</td>
-                                <td width="240">总工程师</td>
-                                <td width="360">上海比亚迪汽车</td>
-                                <td width="160">18000</td>
-                            </tr>
-                        </tbody>
-                  <tbody>
-                            <tr class="tr2">
-                                <td width="120">张*才</td>
-                                <td width="120">本科</td>
-                                <td width="240">机器人方案工程师</td>
-                                <td width="360">上海沃迪智能装备</td>
-                                <td width="160">12000</td>
-                            </tr>
-                        </tbody>
-                   <tbody>
-                            <tr class="tr1">
-                                <td width="120">张*山</td>                    
-                                <td width="120">本科</td>
-                                <td width="240">机器人研发工程师</td>
-                                <td width="360">上海上汽大众汽车</td>
-                                <td width="160">9500</td>
-                            </tr>
-                        </tbody>
-                  <tbody>
-                            <tr class="tr2">
-                                <td width="120">吴*功</td>                       
-                                <td width="120">本科</td>
-                                <td width="240">机器人调试工程师</td>
-                                <td width="360">浙江吉利汽车</td>
-                                <td width="160">7500</td>
-                            </tr>
-                        </tbody>
+                      {/foreach}
                     </table>
                 </div>
             </div>  
@@ -488,14 +393,14 @@
         <strong class="hyxe1">Businesses Coopertion</strong>
         <strong class="hyxe2"><a  name="a7">合作企业</a></strong>
         <hr/>
-        <span class="hyxe3">沃德学院在北上广深太原西安签署80多家互联网合作企业,将定期向沃德学院提供用人需求并合作技术交流。沃德学院也定时到合作单位进行市场调研强化课程与企业需求的结合</span>
+        <span class="hyxe3">{$index7['desc']}</span>
       </div>
     </div>
     <div style="clear:both"></div>
     <div class="hyx_c">
       <div class="hyx_c1">
         <div class="hyx_c2">
-          <img src="/static/picture/hezuoqiye.png">
+          <img src="/static/picture/{$index7.img}">
         </div>
       </div>
     </div>
@@ -509,14 +414,11 @@
       <div style="clear:both"></div>
       <div class="gs_bottom3">
         <div class="left">
-          <p class="gs_04">Copyright © 2016-2018 山西哈伦沃德网络科技有限公司 版权所有. 晋ICP备16004158号-1</p>
-          <p class="gs_05"><a target="_blank" href="http://j.map.baidu.com/2zm3F">太原总校区:太原市南内环街189号圣杰美术学院楼6层&nbsp;&nbsp;&nbsp;电话:0351-2023299</a> <a target="_blank" href="http://j.map.baidu.com/Mrz3F"></a></p>
-          <p class="gs_05">运城校区:运城市盐湖区人民北路与工农东街路口鑫鹏大厦8-10层&nbsp;&nbsp;&nbsp;电话:0359-2513144</p>
-          <p class="gs_05">太原分校:太原市体育西路309号园梅源商务大厦15层&nbsp;&nbsp;&nbsp;电话:0351-2023299</p>
-          <p class="gs_05">太谷分校:晋中市太谷县山西农业大学新晨曦市场10号楼3层&nbsp;&nbsp;&nbsp;电话:0351-2023299</p>
+          <p class="gs_04" style="line-height: 50px;font-size: 15px">{$index8.address}</p>
+          <p class="gs_05" style="line-height: 50px;font-size: 15px">{$index8.beian}</p>
         </div>
         <div class="right">
-          <img src="/static/picture/54.png" class="gs_img1">
+          <img src="/static/picture/{$index8.img}" class="gs_img1">
         </div>
         
       </div>

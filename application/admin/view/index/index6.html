@@ -6,13 +6,14 @@
     <title>欢迎页面-X-admin2.0</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta name="viewport" content="width=device-width,user-scalable=yes,minimum-scale=0.4,initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/font.css">
-    <link rel="stylesheet" href="/css/xadmin.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <link rel="stylesheet" href="/static/css/layui.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/js/xadmin.js"></script>
+    <script type="text/javascript" src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -21,13 +22,22 @@
   </head>
   
   <body class="layui-anim layui-anim-up">
+    <!-- <div class="x-nav">
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div> -->
     <div class="x-body">
 
       <table class="layui-hide" id="test" lay-filter="test"></table>
 
       <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">还款详情</a>
-        <a class="layui-btn layui-btn-xs" lay-event="del">点击结清</a>
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+      </script>
+
+      <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+          <button class="layui-btn"><a href="/admin/index/index6add">新增</a></button>
+        </div>
       </script>
 
     </div>
@@ -37,28 +47,20 @@
         
         table.render({
           elem: '#test'
-          ,url:'/index/index/jiekuan'
-          ,toolbar:'true'
-          ,title: '用户数据表'
+          ,url:'/admin/index/index6view'
+          
+          ,toolbar:'#toolbarDemo'
+          ,title: '就业学院表'
           ,cols: [[
-            {fixed: 'left',field:'id', title:'ID', sort: true,width:50}
-            ,{field:'name', title:'姓名', sort: true,edit: 'text',width:100}
-            ,{field:'money', title:'金额', sort: true,edit: 'text',width:80}
-            ,{field:'tel', title:'手机', sort: true,edit: 'text',width:150}
-            ,{field:'lixi', title:'利息',  sort: true,edit: 'text',width:75}
-            ,{field:'yue', title:'月结',  sort: true,width:75}
-            ,{field:'yinghuanlixi', title:'应还利息',  sort: true,width:100}
-            ,{field:'yihuanlixi', title:'已还利息',  sort: true,edit: 'text',width:100}
-            ,{field:'yijietime', title:'已借天数',  sort: true,width:100}
-            ,{field:'shengyutime', title:'剩余天数',  sort: true,width:100}
-            ,{field:'start_time', title:'借款时间',  sort: true,edit: 'text',width:150}
-            ,{field:'end_time', title:'还款时间',  sort: true,edit: 'text',width:150}
-            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+            {fixed: 'left',field:'id', title:'ID', sort: true}
+            ,{field:'name', title:'姓名', sort: true,edit: 'text'}
+            ,{field:'education', title:'学历', sort: true,edit: 'text'}
+            ,{field:'job', title:'岗位', sort: true,edit: 'text'}
+            ,{field:'business', title:'公司',  sort: true,edit: 'text'}
+            ,{field:'wages', title:'工资',  sort: true,edit: 'text'}
+            ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
           ]]
-          ,id: 'testReload'
-          ,page: true
-          ,even: true
-          ,size: 'lg'
+          // ,page: true
         });
         
         //监听工具条
@@ -79,8 +81,8 @@
             });
           } else if(obj.event === 'del'){
             var data = obj.data;
-            layer.confirm('真的要结束'+data.name+'的借单吗', function(index){
-              $.post("/index/index/del",{id:data.id});
+            layer.confirm('真的要删除'+data.name+'吗？', function(index){
+              $.post("/admin/index/index6del",{id:data.id});
               obj.del();
               layer.close(index);
             });
@@ -89,33 +91,12 @@
           }
         });
 
-        var $ = layui.$, active = {
-          reload: function(){
-            var demoReload = $('#demoReload');
-            
-            //执行重载
-            table.reload('testReload', {
-              page: {
-                curr: 1 //重新从第 1 页开始
-              }
-              ,where: {
-                tel: demoReload.val()
-              }
-            });
-          }
-        };
-        
-        $('.demoTable .layui-btn').on('click', function(){
-          var type = $(this).data('type');
-          active[type] ? active[type].call(this) : '';
-        });
-
         //监听单元格编辑
         table.on('edit(test)', function(obj){
           var value = obj.value //得到修改后的值
           ,data = obj.data //得到所在行所有键值
           ,field = obj.field; //得到字段
-          $.post("/index/index/edit",
+          $.post("/admin/index/index6edit",
           {
             id:data.id,
             field:field,
