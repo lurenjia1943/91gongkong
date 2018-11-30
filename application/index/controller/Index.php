@@ -35,4 +35,28 @@ class Index extends Controller
         $this->assign("index8",$index8);
         return view();
     }
+
+    //文章页面
+    //首页呈现
+    public function article()
+    {
+        $webinfo = Webinfo::find();
+        $index1 = db('index1')->where('id',1)->value('desc');
+        $index2 = db('index2')->where('id',1)->value('logopath');
+        $index3 = db('index3')->where('id',1)->find();
+        $index8 = db('index8')->find();
+        //基本信息
+        $this->assign("webtitle",$webinfo->webtitle);
+        $this->assign("webkeywords",$webinfo->webkeywords);
+        $this->assign("webdesc",$webinfo->webdesc);
+        //首页一层
+        $this->assign("index1",$index1);
+        $this->assign("index2",$index2);
+        $this->assign("banner1",$index3['banner1']);
+        $this->assign("banner2",$index3['banner2']);
+        $this->assign("banner3",$index3['banner3']);
+        $this->assign("banner4",$index3['banner4']);
+        $this->assign("index8",$index8);
+        return view();
+    }
 }
