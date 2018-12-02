@@ -3,6 +3,7 @@ namespace app\admin\controller;
 use think\Controller;
 use app\admin\model\Webinfo;
 use app\admin\model\Index6;
+use app\admin\model\Article;
 
 class Index extends Controller
 {
@@ -181,13 +182,13 @@ EOF;
         }else{
             echo "更新失败";
         }
-        
     }
 
     //新增学员
     public function index6add(){
         return view();
     }
+
     //新增学员
     public function index6insert(){
         $user = new Index6;
@@ -274,5 +275,89 @@ EOF;
     public function index8edit1(){
         db('index8')->update(['address' => input('address'),'beian' => input('beian'),'id'=>1]);
         $this->success('更新成功');
+    }
+
+    //添加文章
+    public function articleadd(){
+        return view();
+    }
+
+    //添加文章
+    public function articleedit(){
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('poster');
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d")];
+            db('article')->insert($data);
+            $this->success('新增成功',"/admin/index/articlelist");
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
+    }
+
+    //文章列表
+    public function articlelistview(){
+        $articlelist = Article::order('time desc')->select();
+        $rows = Article::count();
+        $articlelist = json_encode($articlelist);
+        $articlelist = '{"code": 0,"msg": "","count": '.$rows.',"data":'.$articlelist.'}';
+        echo $articlelist;
+    }
+
+    //删除文章
+    public function articledel(){
+        Article::destroy(input('id'));
+    }
+
+    //文章单元格编辑
+    public function articleedit1(){
+        $id = input('id');
+        $field = input('field');
+        $value = input('value');
+
+        $user = new Article;
+        $oldvalue = $user ->find($id)->$field;
+        //过滤post数组中的非数据表字段数据
+        $m = $user->save([$field=>$value], ['id' => $id]);
+
+        if ($m) {
+            echo "更新成功";
+        }else{
+            echo "更新失败";
+        }
+    }
+
+    public function articlelist(){
+        return view();
+    }
+
+    //文章更新
+    public function articleupdate($id){
+        $article = db('article')->find($id);
+        $this->assign("article",$article);
+        return view();
+    }
+
+    //文章更新
+    public function articleupdate1(){
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('poster');
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
+            db('article')->update($data);
+            $this->success('更新成功',"/admin/index/articlelist");
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
     }
 }

@@ -129,69 +129,43 @@
                                 <br><br><br>
                                 <main class="packages-list-container" id="all-packages">
                                     <div class="container">
+                                        
                                         <div class="list-group packages col-md-8" id="common-packages">
-                                            <a href="/twitter-bootstrap/" class="package list-group-item">
+                                            {volist name='article' id='vo'}
+                                            <a href="/index/index/articlelist?id={$vo.id}" class="package list-group-item">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <img src="/static/picture/kc-1.jpg" height="160px" width="120px">
+                                                            <img src="/static/picture/{$vo.poster}" height="100px" width="133px">
                                                         </div>
                                                         <div class="col-md-9 hidden-xs">
-                                                            <h3>新闻标题</h3>
-                                                            <p class="package-description">Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>
-                                                            <div style="float: right;font-size: 10px">发表于 2018-09-09</div>
+                                                            <h4>{$vo.title}</h4>
+                                                            <div style="float: right;font-size: 10px">发表于 {$vo.time}</div>
                                                         </div>
                                                     </div>
                                                 </a>
                                             <br>
-                                            <a href="/twitter-bootstrap/" class="package list-group-item">
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <img src="/static/picture/kc-1.jpg" height="160px" width="120px">
-                                                        </div>
-                                                        <div class="col-md-9 hidden-xs">
-                                                            <h3>新闻标题新闻标题新闻标题新闻标题新闻</h3>
-                                                            <p class="package-description">Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>
-                                                            <div style="float: right;font-size: 10px">发表于 2018-09-09</div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            <br>
-                                            <a href="/twitter-bootstrap/" class="package list-group-item">
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <img src="/static/picture/kc-1.jpg" height="160px" width="120px">
-                                                        </div>
-                                                        <div class="col-md-9 hidden-xs">
-                                                            <h3>新闻标题</h3>
-                                                            <p class="package-description">Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。Bootstrap 是全球最受欢迎的前端组件库，用于开发响应式布局、移动设备优先的 WEB 项目。</p>
-                                                            <div style="float: right;font-size: 10px">发表于 2018-09-09</div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            <br>
+                                            {/volist}
+                                            {$article->render()}
                                         </div>
-                                        <aside class="col-md-4 sidebar">
+                                        <aside class="col-md-3 sidebar">
                                             <div class="widget">
                                                 <h4 class="title">公众号</h4>
                                                 <div class="content community">
-                                                    <img src="/static/picture/weixin.jpg" height="200px" width="200px">
+                                                    <img src="/static/picture/{$index8.img}" height="200px" width="200px">
                                                 </div>
                                             </div>
                                             <div class="widget"><h4 class="title">最新开班时间</h4>
-                                                <h5 style="color: red">2018-11-20：西门子全科班</h5>
+                                                <h5 style="color: red">2018年3月5日 西门子全科班 名额已不多 火热报名中...</h5>
                                             </div>
                                            <div class="widget">
                                                 <h4 class="title">最新动态</h4>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
-                                                <a href="https://docs.golaravel.com/docs/5.6/" class="btn btn-default btn-block">新闻标题新闻标题新闻标题新闻标题新闻</a>
+                                                {foreach $list as $key=>$vo }
+
+                                                    <a href="/index/index/articlelist?id={$vo.id}" class="btn btn-default btn-block">{$vo.title|mb_substr=0,10}......</a>
+                                                {/foreach}
                                             </div>
                                         </aside>
+                                        
                                         <div class="list-group packages" id="search-results" style="display: none"></div>
                                     </div>
                                 </main>
