@@ -49,7 +49,8 @@
         table.render({
           elem: '#test'
           ,url:'/admin/index/articlelistview'
-          ,toolbar:'#toolbarDemo'
+          ,page: true
+          ,toolbar:'default'
           ,title: '文章列表'
           ,cols: [[
             {fixed: 'left',field:'id', title:'ID', sort: true,width:50}
@@ -57,7 +58,7 @@
             ,{fixed: 'right',field:'time', title:'创建时间',edit: 'text',width:120}
             ,{fixed: 'right', title:'操作', toolbar: '#barDemo',width:120}
           ]]
-          ,page: true
+          
         });
         
         //监听工具条

@@ -1,0 +1,89 @@
+<div class="gs_bottom3">
+    <div class="left">
+        <p class="gs_04" style="line-height: 50px;font-size: 15px">{$index8.address}</p>
+        <p class="gs_05" style="line-height: 50px;font-size: 15px">{$index8.beian}</p>
+    </div>
+    <div class="right">
+        <img src="/static/picture/{$index8.img}" class="gs_img1"  width="100px">
+                                    </div>
+    </div>
+</div>
+</div>
+<script src="/static/js/slider.js"></script>
+<script type="text/javascript">
+$(function() {
+    var bannerSlider = new Slider($('#banner_tabs'), {
+        time: 5000,
+        delay: 400,
+        event: 'hover',
+        auto: true,
+        mode: 'fade',
+        controller: $('#bannerCtrl'),
+        activeControllerCls: 'active'
+    });
+    $('#banner_tabs .flex-prev').click(function() {
+        bannerSlider.prev()
+    });
+    $('#banner_tabs .flex-next').click(function() {
+        bannerSlider.next()
+    });
+})
+</script>
+<script>
+$(function() {
+    $(".hyx_b3").hover(function() {
+        //alert("12")
+        $(this).addClass("hyx_b3a");
+    }, function() {
+        //alert("12")
+        $(this).removeClass("hyx_b3a");
+    })
+
+})
+</script>
+<script>
+$(function() {
+    $(".hyx_a2").hover(function() {
+        $(this).addClass("hyx_a2a");
+    }, function() {
+        $(this).removeClass("hyx_a2a");
+    })
+
+})
+</script>
+<script>
+$(function() {
+    $(".mouse").mouseover(function() {
+        $(this).css("border", "1px solid http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564");
+        $(this).find(".lhjf21").css("background-color", "#0d97be");
+    }).mouseout(function() {
+        $(this).css("border", "1px solid http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564");
+        $(this).find(".lhjf21").css("background-color", "#f1f1f1");
+    });
+})
+</script>
+<!-- 回到顶部 -->
+<script>
+$(function() {
+    //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失  
+    $(function() {
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 100) {
+                $("#back-to-top").fadeIn(1500);
+            } else {
+                $("#back-to-top").fadeOut(1500);
+            }
+        });
+
+        //当点击跳转链接后，回到页面顶部位置  
+
+        $("#back-to-top").click(function() {
+            $('body,html').animate({ scrollTop: 0 }, 1000);
+            return false;
+        });
+    });
+});
+</script>
+</body>
+
+</html>

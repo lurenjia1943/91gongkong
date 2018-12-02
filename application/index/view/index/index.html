@@ -1,553 +1,287 @@
-﻿<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>{$webtitle}</title>
-    <meta name="keywords" content="{$webkeywords}" />
-    <meta name="description" content="{$webdesc}" />
-    <!--加载自定义css样式表-->
-    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/static/css/index.css" rel="stylesheet">
-    <!--加载系统jquery库-->
-    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
-    <style type="text/css">
-    ui,
-    li {
-        list-style: none;
-    }
-
-    #news {
-        height: 200px;
-        overflow: hidden;
-    }
-    </style>
-    <script type="text/javascript">
-    function addEventSimple(obj, evt, fn) {
-        if (obj.addEventListener) {
-            obj.addEventListener(evt, fn, false);
-        } else if (obj.attachEvent) {
-            obj.attachEvent('on' + evt, fn);
-        }
-    }
-
-    addEventSimple(window, 'load', initScrolling);
-
-    var scrollingBox;
-    var scrollingInterval;
-    var reachedBottom = false;
-    var bottom;
-
-    function initScrolling() {
-        scrollingBox = document.getElementById('xst');
-        scrollingBox.style.overflow = "hidden";
-        scrollingInterval = setInterval("scrolling()", 50);
-        scrollingBox.onmouseover = over;
-        scrollingBox.onmouseout = out;
-    }
-
-    function scrolling() {
-        var origin = scrollingBox.scrollTop++;
-        // alert(scrollingBox.scrollTop++);
-        if (origin == scrollingBox.scrollTop) {
-            if (!reachedBottom) {
-                scrollingBox.innerHTML += scrollingBox.innerHTML;
-                reachedBottom = true;
-                bottom = origin;
-            } else {
-                scrollingBox.scrollTop = bottom;
-            }
-        }
-    }
-
-    function over() {
-        clearInterval(scrollingInterval);
-    }
-
-    function out() {
-        scrollingInterval = setInterval("scrolling()", 50);
-    }
-    </script>
-    <script>
-    var _hmt = _hmt || [];
-    (function() { var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?ec367e174829d7023619742e62b9d201"; var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s); })();
-    </script>
-</head>
-
-<body>
-    <p id="back-to-top"><a href="#top"><span></span><img src="/static/picture/top.png"></a></p>
-    <!-- 单页主体 -->
-    <div class="subject">
-        <!-- 头部 -->
-        <div class="snav">
-            <div class="lhjhead">
-                <div class="ft"><h3>{$index1}</h3>
-                </div><a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><div class="bt">提前报名 &nbsp;&nbsp;<img src="/static/picture/1.png"></div></a>
+﻿{include file="index/head" /}
+<!-- 轮播图 -->
+<div id="banner_tabs" class="flexslider" style="position: relative;">
+    <ul class="slides">
+        <li style="background-image: url(/static/picture/{$banner1}); background-repeat: no-repeat; background-position: center center; ">
+        </li>
+        <li style="background-image: url(/static/picture/{$banner2}); background-repeat: no-repeat; background-position: center center; ">
+        </li>
+        <li style="background-image: url(/static/picture/{$banner3}); background-repeat: no-repeat; background-position: center center; display: none;">
+        </li>
+        <li style="background-image: url(/static/picture/{$banner4}); background-repeat: no-repeat; background-position: center center; display: none;">
+        </li>
+    </ul>
+    <ul class="flex-direction-nav">
+        <li><a class="flex-prev" href="javascript:;">Previous</a></li>
+        <li><a class="flex-next" href="javascript:;">Next</a></li>
+    </ul>
+    <ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
+        <li><a>1</a></li>
+        <li><a>2</a></li>
+        <li><a>2</a></li>
+        <li><a>2</a></li>
+    </ol>
+</div>
+<div style="clear:both"></div>
+<!-- 开班信息 -->
+<div class="hyxe">
+    <div class="enav">
+        <strong class="hyxe1">The Class Infomation</strong>
+        <strong class="hyxe2"><a  name="a1">开班信息</a></strong>
+        <hr />
+        <span>放下你的犹豫和不舍,立即加入工控工程师的行列</span>
+    </div>
+</div>
+<div style="clear:both"></div>
+<div class="hyx_a">
+    <div class="hyx_a1">
+        <!-- 第一个 -->
+        <div class="hyx_a2">
+            <div class="hyx_a3">
+                <strong style="display:block">{$index4.0.classname_zh}</strong>
+                <span style="display:block">{$index4.0.classname_en}</span>
             </div>
-        </div>
-        <div style="clear:both"></div>
-        <!-- 导航 -->
-        <div class="navigation">
-            <div class="nnav">
-                <div class="lhja">
-                    <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><img src="/static/picture/{$index2}" style="height: 80px"></a>
+            <div class="hyx_a4">
+                {$index4.0.desc}
+            </div>
+            <div class="hyx_a5">
+                <p>余位不多，速速抢位</p>
+            </div>
+            <div class="hyx_a6">
+                <img src="/static/picture/31.png">
+          </div>
+                <div class="hyx_a7">
+                    <p>报名截止</p>
                 </div>
-                <div class="lhjc">
-                    <div class="lhjc1">
-                        <ul>
-                            <li>
-                                <a href="#">
-                  <strong style="display:block;">首页</strong>
-                  <span style="display:block;">Home</span>
-                </a>
-                            </li>
-                        </ul>
+                <div class="hyx_a8">
+                    <img src="/static/picture/32.png">
+          </div>
+                    <div style="clear:both"></div>
+                    <div class="hyx_a9">
+                        <p>{$index4.0.endtime}</p>
                     </div>
-                    <div class="lhjc2"><img src="/static/picture/3.png"></div>
-                        <div class="lhjc1">
-                            <ul>
-                                <li>
-                                    <a href="#a1">
-                  <strong style="display:block;">开班信息</strong>
-                  <span style="display:block;">Information</span>
-                </a>
-                                </li>
-                            </ul>
+                    <div class="hyx_a10">
+                        <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p >预约报名</p></a>
+                    </div>
+                </div>
+                <!-- 第二个 -->
+                <div class="hyx_a2">
+                    <div class="hyx_a3" style="background-color:#ffbc00">
+                        <strong style="display:block">{$index4.1.classname_zh}</strong>
+                        <span style="display:block">{$index4.1.classname_en}</span>
+                    </div>
+                    <div class="hyx_a4" style="background-color:#Ffcc4d">
+                        {$index4.1.desc}
+                    </div>
+                    <div class="hyx_a5">
+                        <p>提前预约，速速抢位</p>
+                    </div>
+                    <div class="hyx_a6">
+                        <img src="/static/picture/31.png">
+          </div>
+                        <div class="hyx_a7">
+                            <p>报名截止</p>
                         </div>
-                        <div class="lhjc2"><img src="/static/picture/3.png"></div>
-                            <div class="lhjc1">
-                                <ul>
-                                    <li>
-                                        <a href="#a3">
-                  <strong style="display:block;">师资力量</strong>
-                  <span style="display:block;">Teachers</span>
-                </a>
-                                    </li>
-                                </ul>
+                        <div class="hyx_a8">
+                            <img src="/static/picture/32.png">
+          </div>
+                            <div style="clear:both"></div>
+                            <div class="hyx_a9">
+                                <p>{$index4.1.endtime}</p>
                             </div>
-                            <div class="lhjc2"><img src="/static/picture/3.png"></div>
-                                <div class="lhjc1">
-                                    <ul>
-                                        <li>
-                                            <a href="#a6">
-                  <strong style="display:block;">学员就业</strong>
-                  <span style="display:block;">Students</span>
-                </a>
-                                        </li>
-                                    </ul>
+                            <div class="hyx_a10">
+                                <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p style="background-color:#FECC17">预约报名</p></a>
+                            </div>
+                        </div>
+                        <!-- 第三个 -->
+                        <div class="hyx_a2">
+                            <div class="hyx_a3" style="background-color: #b5c700">
+                                <strong style="display:block">{$index4.2.classname_zh}</strong>
+                                <span style="display:block">{$index4.2.classname_en}</span>
+                            </div>
+                            <div class="hyx_a4" style="background-color: #CCDB38;">
+                                {$index4.2.desc}
+                            </div>
+                            <div class="hyx_a5">
+                                <p>余位不多，速速抢位</p>
+                            </div>
+                            <div class="hyx_a6">
+                                <img src="/static/picture/31.png">
+          </div>
+                                <div class="hyx_a7">
+                                    <p>报名截止</p>
                                 </div>
-                                <div class="lhjc2"><img src="/static/picture/3.png"></div>
-                                    <div class="lhjc1">
-                                        <ul>
-                                            <li>
-                                                <a href="#a2">
-                  <strong style="display:block;">课程大纲</strong>
-                  <span style="display:block;">Courses</span>
-                </a>
-                                            </li>
-                                        </ul>
+                                <div class="hyx_a8">
+                                    <img src="/static/picture/32.png">
+          </div>
+                                    <div style="clear:both"></div>
+                                    <div class="hyx_a9">
+                                        <p>{$index4.2.endtime}</p>
                                     </div>
-                                    <div class="lhjc2"><img src="/static/picture/3.png"></div>
-                                        <div class="lhjc1">
-                                            <ul>
-                                                <li>
-                                                    <a href="/index/index/article">
-                  <strong style="display:block;">学院动态</strong>
-                  <span style="display:block;">Institute</span>
-                </a>
-                                                </li>
-                                            </ul>
+                                    <div class="hyx_a10">
+                                        <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p style="background-color:#CCDB38">预约报名</p></a>
+                                    </div>
+                                </div>
+                                <!-- 第四个 -->
+                                <div class="hyx_a2">
+                                    <div class="hyx_a3" style="background-color:#00AEDD">
+                                        <strong style="display:block">{$index4.3.classname_zh}</strong>
+                                        <span style="display:block">{$index4.3.classname_en}</span>
+                                    </div>
+                                    <div class="hyx_a4" style="background-color:#00BFF3">
+                                        {$index4.3.desc}
+                                    </div>
+                                    <div class="hyx_a5">
+                                        <p>预约报名，速速抢位</p>
+                                    </div>
+                                    <div class="hyx_a6">
+                                        <img src="/static/picture/31.png">
+          </div>
+                                        <div class="hyx_a7">
+                                            <p>报名截止</p>
                                         </div>
-                                        <div class="lhjc2"><img src="/static/picture/3.png"></div>
-                                            <div class="lhjc1">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#a5">
-                  <strong style="display:block;">91论坛</strong>
-                  <span style="display:block;">bbs</span>
-                </a>
-                                                    </li>
-                                                </ul>
+                                        <div class="hyx_a8">
+                                            <img src="/static/picture/32.png">
+          </div>
+                                            <div style="clear:both"></div>
+                                            <div class="hyx_a9">
+                                                <p>{$index4.3.endtime}</p>
+                                            </div>
+                                            <div class="hyx_a10">
+                                                <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p style="background-color:#00BFF3">预约报名</p></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div style="clear:both"></div>
-                                <!-- 轮播图 -->
-                                <div id="banner_tabs" class="flexslider" style="position: relative;">
-                                    <ul class="slides">
-                                        <li style="background-image: url(/static/picture/{$banner1}); background-repeat: no-repeat; background-position: center center; ">
-                                        </li>
-                                        <li style="background-image: url(/static/picture/{$banner2}); background-repeat: no-repeat; background-position: center center; width: 1326px;">
-                                        </li>
-                                        <li style="background-image: url(/static/picture/{$banner3}); background-repeat: no-repeat; background-position: center center; display: none;">
-                                        </li>
-                                        <li style="background-image: url(/static/picture/{$banner4}); background-repeat: no-repeat; background-position: center center; display: none;">
-                                        </li>
-                                    </ul>
-                                    <ul class="flex-direction-nav">
-                                        <li><a class="flex-prev" href="javascript:;">Previous</a></li>
-                                        <li><a class="flex-next" href="javascript:;">Next</a></li>
-                                    </ul>
-                                    <ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
-                                        <li><a>1</a></li>
-                                        <li><a>2</a></li>
-                                        <li><a>2</a></li>
-                                        <li><a>2</a></li>
-                                    </ol>
-                                </div>
-                                <div style="clear:both"></div>
-                                <!-- 开班信息 -->
-                                <div class="hyxe">
-                                    <div class="enav">
-                                        <strong class="hyxe1">The Class Infomation</strong>
-                                        <strong class="hyxe2"><a  name="a1">开班信息</a></strong>
+                                <!-- 师资力量 -->
+                                <div class="lhjf">
+                                    <div class="lhjf1">
+                                        <strong class="lhje1">Teachers strength</strong>
+                                        <strong class="lhje2"><a name="a2"><a name="a3">师资力量</a></a></strong>
                                         <hr />
-                                        <span>放下你的犹豫和不舍,立即加入工控工程师的行列</span>
+                                        <span>多年开发工作经验全给你</span>
+                                        {foreach $index5 as $key=>$vo }
+                                        <div class="lhjf2 mouse">
+                                            <div class="lhjf21"></div>
+                                            <div class="lhjf3"><img src="/static/picture/{$vo.img}" class="img-circle"></div>
+                                                <strong class="lhjf4" style="display:block;">{$vo.name}</strong>
+                                                <p class="lhjf5" style="display:block;">{$vo.desc}</p>
+                                            </div>
+                                            {/foreach}
+                                        </div>
                                     </div>
-                                </div>
-                                <div style="clear:both"></div>
-                                <div class="hyx_a">
-                                    <div class="hyx_a1">
-                                        <!-- 第一个 -->
-                                        <div class="hyx_a2">
-                                            <div class="hyx_a3">
-                                                <strong style="display:block">{$index4.0.classname_zh}</strong>
-                                                <span style="display:block">{$index4.0.classname_en}</span>
-                                            </div>
-                                            <div class="hyx_a4">
-                                                {$index4.0.desc}
-                                            </div>
-                                            <div class="hyx_a5">
-                                                <p>余位不多，速速抢位</p>
-                                            </div>
-                                            <div class="hyx_a6">
-                                                <img src="/static/picture/31.png">
-          </div>
-                                                <div class="hyx_a7">
-                                                    <p>报名截止</p>
-                                                </div>
-                                                <div class="hyx_a8">
-                                                    <img src="/static/picture/32.png">
-          </div>
-                                                    <div style="clear:both"></div>
-                                                    <div class="hyx_a9">
-                                                        <p>{$index4.0.endtime}</p>
-                                                    </div>
-                                                    <div class="hyx_a10">
-                                                        <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p >预约报名</p></a>
-                                                    </div>
-                                                </div>
-                                                <!-- 第二个 -->
-                                                <div class="hyx_a2">
-                                                    <div class="hyx_a3" style="background-color:#ffbc00">
-                                                        <strong style="display:block">{$index4.1.classname_zh}</strong>
-                                                        <span style="display:block">{$index4.1.classname_en}</span>
-                                                    </div>
-                                                    <div class="hyx_a4" style="background-color:#Ffcc4d">
-                                                        {$index4.1.desc}
-                                                    </div>
-                                                    <div class="hyx_a5">
-                                                        <p>提前预约，速速抢位</p>
-                                                    </div>
-                                                    <div class="hyx_a6">
-                                                        <img src="/static/picture/31.png">
-          </div>
-                                                        <div class="hyx_a7">
-                                                            <p>报名截止</p>
-                                                        </div>
-                                                        <div class="hyx_a8">
-                                                            <img src="/static/picture/32.png">
-          </div>
-                                                            <div style="clear:both"></div>
-                                                            <div class="hyx_a9">
-                                                                <p>{$index4.1.endtime}</p>
-                                                            </div>
-                                                            <div class="hyx_a10">
-                                                                <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p style="background-color:#FECC17">预约报名</p></a>
-                                                            </div>
-                                                        </div>
-                                                        <!-- 第三个 -->
-                                                        <div class="hyx_a2">
-                                                            <div class="hyx_a3" style="background-color: #b5c700">
-                                                                <strong style="display:block">{$index4.2.classname_zh}</strong>
-                                                                <span style="display:block">{$index4.2.classname_en}</span>
-                                                            </div>
-                                                            <div class="hyx_a4" style="background-color: #CCDB38;">
-                                                                {$index4.2.desc}
-                                                            </div>
-                                                            <div class="hyx_a5">
-                                                                <p>余位不多，速速抢位</p>
-                                                            </div>
-                                                            <div class="hyx_a6">
-                                                                <img src="/static/picture/31.png">
-          </div>
-                                                                <div class="hyx_a7">
-                                                                    <p>报名截止</p>
-                                                                </div>
-                                                                <div class="hyx_a8">
-                                                                    <img src="/static/picture/32.png">
-          </div>
-                                                                    <div style="clear:both"></div>
-                                                                    <div class="hyx_a9">
-                                                                        <p>{$index4.2.endtime}</p>
-                                                                    </div>
-                                                                    <div class="hyx_a10">
-                                                                        <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p style="background-color:#CCDB38">预约报名</p></a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- 第四个 -->
-                                                                <div class="hyx_a2">
-                                                                    <div class="hyx_a3" style="background-color:#00AEDD">
-                                                                        <strong style="display:block">{$index4.3.classname_zh}</strong>
-                                                                        <span style="display:block">{$index4.3.classname_en}</span>
-                                                                    </div>
-                                                                    <div class="hyx_a4" style="background-color:#00BFF3">
-                                                                        {$index4.3.desc}
-                                                                    </div>
-                                                                    <div class="hyx_a5">
-                                                                        <p>预约报名，速速抢位</p>
-                                                                    </div>
-                                                                    <div class="hyx_a6">
-                                                                        <img src="/static/picture/31.png">
-          </div>
-                                                                        <div class="hyx_a7">
-                                                                            <p>报名截止</p>
-                                                                        </div>
-                                                                        <div class="hyx_a8">
-                                                                            <img src="/static/picture/32.png">
-          </div>
-                                                                            <div style="clear:both"></div>
-                                                                            <div class="hyx_a9">
-                                                                                <p>{$index4.3.endtime}</p>
-                                                                            </div>
-                                                                            <div class="hyx_a10">
-                                                                                <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" target="_blank"><p style="background-color:#00BFF3">预约报名</p></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div style="clear:both"></div>
-                                                                <!-- 师资力量 -->
-                                                                <div class="lhjf">
-                                                                    <div class="lhjf1">
-                                                                        <strong class="lhje1">Teachers strength</strong>
-                                                                        <strong class="lhje2"><a name="a2"><a name="a3">师资力量</a></a></strong>
-                                                                        <hr />
-                                                                        <span>多年开发工作经验全给你</span>
-                                                                        {foreach $index5 as $key=>$vo }
-                                                                        <div class="lhjf2 mouse">
-                                                                            <div class="lhjf21"></div>
-                                                                            <div class="lhjf3"><img src="/static/picture/{$vo.img}" class="img-circle"></div>
-                                                                                <strong class="lhjf4" style="display:block;">{$vo.name}</strong>
-                                                                                <p class="lhjf5" style="display:block;">{$vo.desc}</p>
-                                                                            </div>
-                                                                            {/foreach}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div style="clear:both"></div>
-                                                                    <!-- 就业学员 -->
-                                                                    <div class="hyxe">
-                                                                        <div class="enav">
-                                                                            <strong class="hyxe1">Employment Trainees</strong>
-                                                                            <strong class="hyxe2"><a  name="a6">就业学员</a></strong>
-                                                                            <hr />
-                                                                            <span>你还在迷茫,他们却已经从这里启程拥抱整个世界</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="gallery" id="activities">
-                                                                        <div class="container">
-                                                                            <div class="gallery-main">
-                                                                                <div class="gallery-bott">
-                                                                                    <div class="jx-box" style="padding-bottom:40px;">
-                                                                                        <div class="jiuyet">
-                                                                                            <img src="/static/picture/jy-.png" alt="" />
+                                    <div style="clear:both"></div>
+                                    <!-- 就业学员 -->
+                                    <div class="hyxe">
+                                        <div class="enav">
+                                            <strong class="hyxe1">Employment Trainees</strong>
+                                            <strong class="hyxe2"><a  name="a6">就业学员</a></strong>
+                                            <hr />
+                                            <span>你还在迷茫,他们却已经从这里启程拥抱整个世界</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery" id="activities">
+                                        <div class="container">
+                                            <div class="gallery-main">
+                                                <div class="gallery-bott">
+                                                    <div class="jx-box" style="padding-bottom:40px;">
+                                                        <div class="jiuyet">
+                                                            <img src="/static/picture/jy-.png" alt="" />
               </div>
-                                                                                            <div class="jiuye" id="xst">
-                                                                                                <table class="jiuyetb" border="0" cellspacing="0" cellpadding="0">
-                                                                                                    <?php $num = 1; ?>
-                                                                                                    {foreach $index6 as $key=>$vo }
-                                                                                                    <?php $num++;$a=$num%2 ?>
-                                                                                                    <tbody>
-                                                                                                        <tr class="tr{$a}">
-                                                                                                            <td width="120">{$vo.name}</td>
-                                                                                                            <td width="120">{$vo.education}</td>
-                                                                                                            <td width="240">{$vo.job}</td>
-                                                                                                            <td width="360">{$vo.business}</td>
-                                                                                                            <td width="160">{$vo.wages}</td>
-                                                                                                        </tr>
-                                                                                                    </tbody>
-                                                                                                    {/foreach}
-                                                                                                </table>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="clearfix"> </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- 合作企业 -->
-                                                                        <div style="clear:both"></div>
-                                                                        <div class="hyxe" style="background-color:#fff;">
-                                                                            <div class="enav">
-                                                                                <strong class="hyxe1">Businesses Coopertion</strong>
-                                                                                <strong class="hyxe2"><a  name="a7">合作企业</a></strong>
-                                                                                <hr />
-                                                                                <span class="hyxe3">{$index7['desc']}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div style="clear:both"></div>
-                                                                        <div class="hyx_c">
-                                                                            <div class="hyx_c1">
-                                                                                <div class="hyx_c2">
-                                                                                    <img src="/static/picture/{$index7.img}">
+                                                            <div class="jiuye" id="xst">
+                                                                <table class="jiuyetb" border="0" cellspacing="0" cellpadding="0">
+                                                                    <?php $num = 1; ?>
+                                                                    {foreach $index6 as $key=>$vo }
+                                                                    <?php $num++;$a=$num%2 ?>
+                                                                    <tbody>
+                                                                        <tr class="tr{$a}">
+                                                                            <td width="120">{$vo.name}</td>
+                                                                            <td width="120">{$vo.education}</td>
+                                                                            <td width="240">{$vo.job}</td>
+                                                                            <td width="360">{$vo.business}</td>
+                                                                            <td width="160">{$vo.wages}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                    {/foreach}
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 合作企业 -->
+                                        <div style="clear:both"></div>
+                                        <div class="hyxe" style="background-color:#fff;">
+                                            <div class="enav">
+                                                <strong class="hyxe1">Businesses Coopertion</strong>
+                                                <strong class="hyxe2"><a  name="a7">合作企业</a></strong>
+                                                <hr />
+                                                <span class="hyxe3">{$index7['desc']}</span>
+                                            </div>
+                                        </div>
+                                        <div style="clear:both"></div>
+                                        <div class="hyx_c">
+                                            <div class="hyx_c1">
+                                                <div class="hyx_c2">
+                                                    <img src="/static/picture/{$index7.img}">
         </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- 底部 -->
-                                                                            <div class="gs1">
-                                                                                <div class="gs_bottom1">
-                                                                                    <p class="gs_01" style="display:block;">知识与技能从来都是低投资,高回报</p>
-                                                                                    <p class="gs_02" style="display:block;">We Awlays Try To Create a Difference</p>
-                                                                                    <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" class="gs_03" style="display:block;" target="_blank">了解更多</a>
-                                                                                </div>
-                                                                                <div style="clear:both"></div>
-                                                                                <div class="gs_bottom3">
-                                                                                    <div class="left">
-                                                                                        <p class="gs_04" style="line-height: 50px;font-size: 15px">{$index8.address}</p>
-                                                                                        <p class="gs_05" style="line-height: 50px;font-size: 15px">{$index8.beian}</p>
-                                                                                    </div>
-                                                                                    <div class="right">
-                                                                                        <img src="/static/picture/{$index8.img}" class="gs_img1" height="100px">
-        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <script src="/static/js/slider.js"></script>
-                                                                            <script type="text/javascript">
-                                                                            $(function() {
-                                                                                var bannerSlider = new Slider($('#banner_tabs'), {
-                                                                                    time: 5000,
-                                                                                    delay: 400,
-                                                                                    event: 'hover',
-                                                                                    auto: true,
-                                                                                    mode: 'fade',
-                                                                                    controller: $('#bannerCtrl'),
-                                                                                    activeControllerCls: 'active'
-                                                                                });
-                                                                                $('#banner_tabs .flex-prev').click(function() {
-                                                                                    bannerSlider.prev()
-                                                                                });
-                                                                                $('#banner_tabs .flex-next').click(function() {
-                                                                                    bannerSlider.next()
-                                                                                });
-                                                                            })
-                                                                            </script>
-                                                                            <script>
-                                                                            $(function() {
-                                                                                $(".hyx_b3").hover(function() {
-                                                                                    //alert("12")
-                                                                                    $(this).addClass("hyx_b3a");
-                                                                                }, function() {
-                                                                                    //alert("12")
-                                                                                    $(this).removeClass("hyx_b3a");
-                                                                                })
+                                                </div>
+                                            </div>
+                                            <!-- 底部 -->
+                                            <div class="gs1">
+                                                <div class="gs_bottom1">
+                                                    <p class="gs_01" style="display:block;">知识与技能从来都是低投资,高回报</p>
+                                                    <p class="gs_02" style="display:block;">We Awlays Try To Create a Difference</p>
+                                                    <a href="http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564" class="gs_03" style="display:block;" target="_blank">了解更多</a>
+                                                </div>
+                                                <div style="clear:both"></div>
+                                                {include file="index/foot" /}
+                                                <script type="text/javascript">
+                                                function addEventSimple(obj, evt, fn) {
+                                                    if (obj.addEventListener) {
+                                                        obj.addEventListener(evt, fn, false);
+                                                    } else if (obj.attachEvent) {
+                                                        obj.attachEvent('on' + evt, fn);
+                                                    }
+                                                }
 
-                                                                            })
-                                                                            </script>
-                                                                            <script>
-                                                                            $(function() {
-                                                                                $(".hyx_a2").hover(function() {
-                                                                                    $(this).addClass("hyx_a2a");
-                                                                                }, function() {
-                                                                                    $(this).removeClass("hyx_a2a");
-                                                                                })
+                                                addEventSimple(window, 'load', initScrolling);
 
-                                                                            })
-                                                                            </script>
-                                                                            <script>
-                                                                            $(function() {
-                                                                                $(".mouse").mouseover(function() {
-                                                                                    $(this).css("border", "1px solid http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564");
-                                                                                    $(this).find(".lhjf21").css("background-color", "#0d97be");
-                                                                                }).mouseout(function() {
-                                                                                    $(this).css("border", "1px solid http://p.qiao.baidu.com/cps/chat?siteId=12834609&userId=18183564");
-                                                                                    $(this).find(".lhjf21").css("background-color", "#f1f1f1");
-                                                                                });
-                                                                            })
-                                                                            </script>
-                                                                            <!-- 回到顶部 -->
-                                                                            <script>
-                                                                            $(function() {
-                                                                                //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失  
-                                                                                $(function() {
-                                                                                    $(window).scroll(function() {
-                                                                                        if ($(window).scrollTop() > 100) {
-                                                                                            $("#back-to-top").fadeIn(1500);
-                                                                                        } else {
-                                                                                            $("#back-to-top").fadeOut(1500);
-                                                                                        }
-                                                                                    });
+                                                var scrollingBox;
+                                                var scrollingInterval;
+                                                var reachedBottom = false;
+                                                var bottom;
 
-                                                                                    //当点击跳转链接后，回到页面顶部位置  
+                                                function initScrolling() {
+                                                    scrollingBox = document.getElementById('xst');
+                                                    scrollingBox.style.overflow = "hidden";
+                                                    scrollingInterval = setInterval("scrolling()", 50);
+                                                    scrollingBox.onmouseover = over;
+                                                    scrollingBox.onmouseout = out;
+                                                }
 
-                                                                                    $("#back-to-top").click(function() {
-                                                                                        $('body,html').animate({ scrollTop: 0 }, 1000);
-                                                                                        return false;
-                                                                                    });
-                                                                                });
-                                                                            });
-                                                                            </script>
-                                                                            <!-- 常见问题轮播 -->
-                                                                            <script type="text/javascript">
-                                                                            $(function() {
-                                                                                var bannerSlider = new Slider($('#banner_tabs1'), {
-                                                                                    time: 5000,
-                                                                                    delay: 400,
-                                                                                    event: 'hover',
-                                                                                    auto: true,
-                                                                                    mode: 'fade',
-                                                                                    controller: $('#bannerCtrl1'),
-                                                                                    activeControllerCls: 'active'
-                                                                                });
-                                                                                $('#banner_tabs1 .flex-prev1').click(function() {
-                                                                                    bannerSlider.prev()
-                                                                                });
-                                                                                $('#banner_tabs1 .flex-next1').click(function() {
-                                                                                    bannerSlider.next()
-                                                                                });
-                                                                            })
-                                                                            </script>
-                                                                            <script type="text/javascript">
-                                                                            $(function() {
-                                                                                var $this = $("#news");
-                                                                                var scrollTimer;
-                                                                                $this.hover(function() {
-                                                                                    clearInterval(scrollTimer);
-                                                                                }, function() {
-                                                                                    scrollTimer = setInterval(function() {
-                                                                                        scrollNews($this);
-                                                                                    }, 1000);
-                                                                                }).trigger("mouseleave");
+                                                function scrolling() {
+                                                    var origin = scrollingBox.scrollTop++;
+                                                    // alert(scrollingBox.scrollTop++);
+                                                    if (origin == scrollingBox.scrollTop) {
+                                                        if (!reachedBottom) {
+                                                            scrollingBox.innerHTML += scrollingBox.innerHTML;
+                                                            reachedBottom = true;
+                                                            bottom = origin;
+                                                        } else {
+                                                            scrollingBox.scrollTop = bottom;
+                                                        }
+                                                    }
+                                                }
 
-                                                                                function scrollNews(obj) {
-                                                                                    var $self = obj.find("ul");
-                                                                                    var lineHeight = $self.find("li:first").height();
-                                                                                    $self.animate({
-                                                                                        "marginTop": -lineHeight + "px"
-                                                                                    }, 600, function() {
-                                                                                        $self.css({
-                                                                                            marginTop: 0
-                                                                                        }).find("li:first").appendTo($self);
-                                                                                    })
-                                                                                }
-                                                                            })
-                                                                            </script>
-                                                                            <!--<script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F997816824610a2a211dc8ab1677ee9b5' type='text/javascript'%3E%3C/script%3E")) </script> -->
-</body>
+                                                function over() {
+                                                    clearInterval(scrollingInterval);
+                                                }
 
-</html>
+                                                function out() {
+                                                    scrollingInterval = setInterval("scrolling()", 50);
+                                                }
+                                                </script>
