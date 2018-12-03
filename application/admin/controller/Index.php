@@ -9,11 +9,17 @@ class Index extends Controller
 {
     public function index()
     {
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         return view();
     }
 
     //网站基本信息
     public function webinfo(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	$webinfo = Webinfo::find();
     	$this->assign("webtitle",$webinfo->webtitle);
     	$this->assign("webkeywords",$webinfo->webkeywords);
@@ -21,8 +27,32 @@ class Index extends Controller
     	return view();
     }
 
+    //登陆
+    public function login(){
+        $username = input('username');
+        $password = input('password');
+
+        $arr = db('admin')->where('username',$username)->find();
+        
+        if ($password == $arr['password']) {
+            session('admin_id', $arr['id']);
+            echo "OK";
+        }else{
+            echo "账号或密码错误";
+        }
+    }
+
+    //退出
+    public function loginout(){
+        session(null);
+        $this->redirect('/admin');
+    }
+
     //网站基本信息修改
     public function webinfoedit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	$webinfo = new Webinfo;
 		// 过滤post数组中的非数据表字段数据
 		$webinfo->save(input(''),['id' => 1]);
@@ -32,6 +62,9 @@ class Index extends Controller
     //首页一层
     public function index1()
     {
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	$index1 = db('index1')->where('id',1)->value('desc');
     	$this->assign("index1",$index1);
         return view();
@@ -39,16 +72,25 @@ class Index extends Controller
 
     //首页一层信息修改
     public function index1edit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	db('index1')->update(['desc' => input('desc'),'id'=>1]);
 		$this->success('更新成功');
     }
 
     public function index2(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	return view();
     }
 
     //修改logo
     public function index2edit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	// 获取表单上传文件 例如上传了001.jpg
 		$file = request()->file('logo');
 		// 移动到框架应用根目录/uploads/ 目录下
@@ -69,11 +111,17 @@ class Index extends Controller
     }
 
     public function index3(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	return view();
     }
 
     //修改轮播
     public function index3edit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
     	//分别是哪个ban图
     	$name = input('name');
     	// 获取表单上传文件 例如上传了001.jpg
@@ -97,6 +145,9 @@ class Index extends Controller
 
     //开班信息
     public function index4(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $index4 = db('index4')->select();
         $this->assign("index4",$index4);
         return view();
@@ -104,12 +155,18 @@ class Index extends Controller
 
     //开班信息修改
     public function index4edit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         db('index4')->update(input(''));
         $this->success('更新成功');
     }
 
     //师资力量
     public function index5(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $index5 = db('index5')->select();
         $this->assign("index5",$index5);
         return view();
@@ -117,6 +174,9 @@ class Index extends Controller
 
     //修改教师头像
     public function index5edit($id){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('file');
         // 移动到框架应用根目录/uploads/ 目录下
@@ -144,12 +204,18 @@ EOF;
 
     //老师信息修改
     public function index5edit1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         db('index5')->update(['name' => input('name'),'desc' => input('desc'),'id'=>input('id')]);
         $this->success('更新成功');
     }
 
     //就业学员
     public function index6view(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $students = Index6::select();
         $rows = Index6::count();
         $students = json_encode($students);
@@ -158,16 +224,25 @@ EOF;
     }
 
     public function index6(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         return view();
     }
 
     //删除学员
     public function index6del(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         Index6::destroy(input('id'));
     }
     
     //学员单元格编辑
     public function index6edit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $id = input('id');
         $field = input('field');
         $value = input('value');
@@ -186,11 +261,17 @@ EOF;
 
     //新增学员
     public function index6add(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         return view();
     }
 
     //新增学员
     public function index6insert(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $user = new Index6;
         // 过滤post数组中的非数据表字段数据
         $user->save(input(''));
@@ -199,6 +280,9 @@ EOF;
 
     //合作企业
     public function index7(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $index7 = db('index7')->find();
         $this->assign("index7",$index7);
         return view();
@@ -206,6 +290,9 @@ EOF;
 
     //合作企业图片
     public function index7edit($id){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('file');
         // 移动到框架应用根目录/uploads/ 目录下
@@ -233,12 +320,18 @@ EOF;
 
     //合作企业信息修改
     public function index7edit1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         db('index7')->update(['desc' => input('desc'),'id'=>1]);
         $this->success('更新成功');
     }
 
     //底部信息
     public function index8(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $index8 = db('index8')->find();
         $this->assign("index8",$index8);
         return view();
@@ -246,6 +339,9 @@ EOF;
 
     //二维码
     public function index8edit($id){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('file');
         // 移动到框架应用根目录/uploads/ 目录下
@@ -273,17 +369,26 @@ EOF;
 
     //底部信息修改
     public function index8edit1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         db('index8')->update(['address' => input('address'),'beian' => input('beian'),'id'=>1]);
         $this->success('更新成功');
     }
 
     //添加文章
     public function articleadd(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         return view();
     }
 
     //添加文章
     public function articleedit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('poster');
         // 移动到框架应用根目录/uploads/ 目录下
@@ -302,6 +407,9 @@ EOF;
 
     //文章列表
     public function articlelistview(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $articlelist = Article::order('time desc')->select();
         $rows = Article::count();
         $articlelist = json_encode($articlelist);
@@ -311,11 +419,17 @@ EOF;
 
     //删除文章
     public function articledel(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         Article::destroy(input('id'));
     }
 
     //文章单元格编辑
     public function articleedit1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $id = input('id');
         $field = input('field');
         $value = input('value');
@@ -333,11 +447,17 @@ EOF;
     }
 
     public function articlelist(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         return view();
     }
 
     //文章更新
     public function articleupdate($id){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         $article = db('article')->find($id);
         $this->assign("article",$article);
         return view();
@@ -345,6 +465,9 @@ EOF;
 
     //文章更新
     public function articleupdate1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('poster');
         // 移动到框架应用根目录/uploads/ 目录下
