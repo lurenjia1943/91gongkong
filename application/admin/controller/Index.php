@@ -48,6 +48,38 @@ class Index extends Controller
         $this->redirect('/admin');
     }
 
+    //修改密码
+    public function updatepass(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        return view();
+    }
+
+    //修改密码
+    public function editpass(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        $username = input('username');
+        $oldpassword = input('oldpassword');
+        $newpassword1 = input('newpassword1');
+        $newpassword2 = input('newpassword2');
+
+        if ($newpassword1 != $newpassword2) {
+            $this->error('两次密码不一致');
+        }
+
+        $rows = db('admin')->where('username',$username)->where('password',$oldpassword)->find();
+
+        if ($rows == null) {
+            $this->error('账号或密码错误');
+        }
+
+        db('admin')->where('username', $username)->update(['password' => $newpassword1]);
+        $this->success('更新成功');
+    }
+
     //网站基本信息修改
     public function webinfoedit(){
         if (!session('?admin_id')) {
