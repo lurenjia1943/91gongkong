@@ -18,8 +18,8 @@
     <ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
         <li><a>1</a></li>
         <li><a>2</a></li>
-        <li><a>2</a></li>
-        <li><a>2</a></li>
+        <li><a>3</a></li>
+        <li><a>4</a></li>
     </ol>
 </div>
 <div style="clear:both"></div>
@@ -172,6 +172,137 @@
                                         </div>
                                     </div>
                                     <div style="clear:both"></div>
+                                    <!-- 教学风采 -->
+                                    <script type="text/javascript">
+                                    $.fn.imgAutoResizer2 = function(options) {
+                                        return this.each(function() {
+                                            var opt = $.extend({
+                                                sizeAttr: 'data-img-size',
+                                                srcAttr: 'data-img-url',
+                                                srcAlt: 'data-img-alt',
+                                                error: null,
+                                                loading: null
+                                            }, options || {});
+
+                                            var $el = $(this),
+                                                src = $el.attr(opt.srcAttr); //, size = $el.attr(opt.sizeAttr).split(',')
+                                            var imgalt = $el.attr(opt.srcAlt);
+                                            // 容器宽高
+                                            var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                                            if (w < 640) { iwidth = parseInt(w) * 0.32 - 20; }
+                                            if (w > 960) { iwidth = 285; }
+                                            if (w < 960 || w > 640) { iwidth = 235; }
+                                            //iwidth = parseInt(w)*0.32-20;
+                                            iheight = parseInt(iwidth);
+
+                                            var dw = iwidth,
+                                                dh = iheight;
+                                            var $img = $('<img />', { src: src }),
+                                                img = $img[0];
+
+
+                                            var autoresize = function() {
+                                                if ($el.data('img.complete')) return;
+                                                // 图片宽高
+                                                var iw = img.width,
+                                                    ih = img.height;
+                                                if (!iw || !ih) return;
+                                                // 比例
+                                                var dr = dw / dh,
+                                                    ir = iw / ih;
+                                                if (!(dw > iw && dh > ih)) {
+                                                    if (dr > ir) {
+                                                        ih = dh;
+                                                        iw = ih * ir;
+                                                    } else {
+                                                        iw = dw;
+                                                        ih = iw / ir;
+                                                    }
+                                                }
+
+                                                // console.log(dr,':',iw,'@',ih);
+                                                $el.data('img.complete', true).css({ position: 'relative', width: dw, height: dh, overflow: 'hidden' });
+                                                $img.css({ width: iw, height: ih, position: 'absolute', top: '50%', left: '50%', marginLeft: -iw / 2, marginTop: -ih / 2 }).appendTo($el.empty());
+
+                                            };
+
+                                            $img
+                                                .load(autoresize)
+                                                .error(function() {
+                                                    if ($.isFunction(opt.error)) opt.error.call($el);
+                                                });
+
+                                            if (img.complete) {
+                                                if (img.width && img.height) autoresize();
+                                            } else {
+                                                if ($.isFunction(opt.loading)) opt.loading.call($el);
+                                            }
+                                        })
+                                    };
+
+                                    $(function() {
+                                        $('div.picture2').imgAutoResizer2({
+                                            loading: function() { $(this).text('loading..'); },
+                                            error: function() { $(this).text('无效..'); }
+                                        });
+                                    });
+                                    </script>
+                                    <div class="hyxe">
+                                        <div class="enav">
+                                            <strong class="hyxe1">Teaching elegant demeanor</strong>
+                                            <strong class="hyxe2"><a  name="a4">教学风采</a></strong>
+                                            <hr />
+                                            <span>浓郁的学习氛围,让你的学习效率事半功倍</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery" id="activities">
+                                        <div class="container">
+                                            <div class="gallery-main">
+                                                <div class="gallery-bott">
+                                                    <div class="jx">
+                                                        <div id="demo">
+                                                            <div id="indemo">
+                                                                <div id="demo1">
+                                                                    <ul>
+                                                                        {foreach $index61 as $key=>$vo }
+                                                                        <li>
+                                                                            <div class="zs_s2">
+                                                                                <div class="picture2" id="picture" data-img-url="/static/picture/{$vo.img}"></div>
+                                                                            </div>
+                                                                        </li>
+                                                                        {/foreach}
+                                                                    </ul>
+                                                                </div>
+                                                                <div id="demo2">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                            <script type="text/javascript">
+                                                            var speed = 20;
+                                                            var tab = document.getElementById("demo");
+                                                            var tab1 = document.getElementById("demo1");
+                                                            var tab2 = document.getElementById("demo2");
+                                                            tab2.innerHTML = tab1.innerHTML;
+
+                                                            function Marquee() {
+                                                                if (tab2.offsetWidth - tab.scrollLeft <= 0)
+                                                                    tab.scrollLeft -= tab1.offsetWidth
+                                                                else {
+                                                                    tab.scrollLeft++;
+                                                                }
+                                                            }
+                                                            var MyMar = setInterval(Marquee, speed);
+                                                            tab.onmouseover = function() { clearInterval(MyMar) };
+                                                            tab.onmouseout = function() { MyMar = setInterval(Marquee, speed) };
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
                                     <!-- 就业学员 -->
                                     <div class="hyxe">
                                         <div class="enav">
@@ -188,7 +319,7 @@
                                                     <div class="jx-box" style="padding-bottom:40px;">
                                                         <div class="jiuyet">
                                                             <img src="/static/picture/jy-.png" alt="" />
-              </div>
+                                                        </div>
                                                             <div class="jiuye" id="xst">
                                                                 <table class="jiuyetb" border="0" cellspacing="0" cellpadding="0">
                                                                     <?php $num = 1; ?>

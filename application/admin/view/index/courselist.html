@@ -32,11 +32,12 @@
 
       <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">编辑</a>
       </script>
 
       <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-          <button class="layui-btn"><a href="/admin/index/index6add">新增</a></button>
+          <button class="layui-btn">课程列表</button>
         </div>
       </script>
 
@@ -47,42 +48,28 @@
         
         table.render({
           elem: '#test'
-          ,url:'/admin/index/index6view'
-          
-          ,toolbar:'#toolbarDemo'
-          ,title: '就业学院表'
+          ,url:'/admin/index/courselistview'
+          ,page: true
+          ,toolbar:'default'
+          ,title: '课程列表'
           ,cols: [[
-            {fixed: 'left',field:'id', title:'ID', sort: true}
-            ,{field:'name', title:'姓名', sort: true,edit: 'text'}
-            ,{field:'education', title:'学历', sort: true,edit: 'text'}
-            ,{field:'job', title:'岗位', sort: true,edit: 'text'}
-            ,{field:'business', title:'公司',  sort: true,edit: 'text'}
-            ,{field:'wages', title:'工资',  sort: true,edit: 'text'}
+            {fixed: 'left',field:'id', title:'ID', sort: true,width:50}
+            ,{field:'title', title:'标题',edit: 'text'}
             ,{fixed: 'right', title:'操作', toolbar: '#barDemo',width:120}
           ]]
-          ,page: true
+          
         });
         
         //监听工具条
         table.on('tool(test)', function(obj){
           var data = obj.data;
           if(obj.event === 'detail'){
-            $.post("/index/index/detail",
-            {
-              id:data.id
-            },
-            function(data,status){
-              layer.open({
-                type: 1,
-                content: data,
-                area: ['800px', '500px']
-              });
-              //layer.alert(data);
-            });
+            //layer.msg('ID：'+ data.id + ' 的查看操作');
+            window.location.href='/admin/index/courseupdate?id='+data.id;
           } else if(obj.event === 'del'){
             var data = obj.data;
-            layer.confirm('真的要删除'+data.name+'吗？', function(index){
-              $.post("/admin/index/index6del",{id:data.id});
+            layer.confirm('真的要删除课程'+data.id+'吗？', function(index){
+              $.post("/admin/index/coursedel",{id:data.id});
               obj.del();
               layer.close(index);
             });
@@ -96,7 +83,7 @@
           var value = obj.value //得到修改后的值
           ,data = obj.data //得到所在行所有键值
           ,field = obj.field; //得到字段
-          $.post("/admin/index/index6edit",
+          $.post("/admin/index/courseedit1",
           {
             id:data.id,
             field:field,

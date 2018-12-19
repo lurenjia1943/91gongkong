@@ -1,11 +1,21 @@
 ﻿{include file="index/head" /}
 <link rel="stylesheet" type="text/css" href="/static/css/screen.min.css">
-<div class="gs_bottom3" style="height:293px;background-image: url('/static/images/promo_banner_bg_01.jpg')"></div>
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/common.css"> -->
+<div class="gs_bottom3" style="height:293px;background-image: url('/static/picture/promo_banner_bg_01.jpg')"></div>
 <div style="clear:both"></div>
-<br><br><br>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ol class="breadcrumb" style="margin-top: 10px; margin-bottom: 10px;">
+				<li><a href="http://47.106.224.12">首页</a></li>
+				<li>学院动态</li>
+			</ol>
+		</div>
+	</div>
+</div>
 <main class="packages-list-container" id="all-packages">
     <div class="container">
-        <div class="list-group packages col-xs-8" id="common-packages">
+        <div class="list-group packages col-xs-9" id="common-packages">
             {volist name='article' id='vo'}
             <a href="/index/index/articlelist?id={$vo.id}" class="package list-group-item">
                 <div class="row">

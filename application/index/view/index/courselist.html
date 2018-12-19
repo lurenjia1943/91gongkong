@@ -7,7 +7,7 @@
         <div class="col-xs-12">
             <ol class="breadcrumb" style="margin-top: 10px; margin-bottom: 10px;">
                 <li><a href="http://47.106.224.12">首页</a></li>
-                <li>学院动态</li>
+                <li>课程大纲</li>
             </ol>
         </div>
     </div>
@@ -16,9 +16,8 @@
     <div class="container">
         <div class="col-xs-9 blog-main">
             <div class="blog-post">
-                <h2 class="blog-post-title">{$article.title}</h2>
-                <p class="blog-post-meta">发表时间：{$article.time}</p>
-                {$article.editorValue}
+                <h2 class="blog-post-title">{$course.title}</h2>
+                {$course.editorValue}
             </div>
         </div>
         <aside class="col-xs-3 sidebar">
@@ -42,4 +41,7 @@
     </div>
 </main>
 <div style="clear:both"></div>
+<script type="text/javascript">
+    $("table").addClass("table table-bordered");
+</script>
 {include file="index/foot" /}

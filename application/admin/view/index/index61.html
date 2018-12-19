@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/static/css/font.css">
     <link rel="stylesheet" href="/static/css/xadmin.css">
-    <link rel="stylesheet" href="/static/css/layui.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="/static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/js/xadmin.js"></script>
@@ -36,7 +35,7 @@
 
       <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-          <button class="layui-btn"><a href="/admin/index/index6add">新增</a></button>
+          <button class="layui-btn"><a href="/admin/index/index61add">新增</a></button>
         </div>
       </script>
 
@@ -47,17 +46,15 @@
         
         table.render({
           elem: '#test'
-          ,url:'/admin/index/index6view'
-          
+          ,url:'/admin/index/index61view'
           ,toolbar:'#toolbarDemo'
-          ,title: '就业学院表'
+          ,title: '教学风采'
+          ,size:'lg'
           ,cols: [[
-            {fixed: 'left',field:'id', title:'ID', sort: true}
-            ,{field:'name', title:'姓名', sort: true,edit: 'text'}
-            ,{field:'education', title:'学历', sort: true,edit: 'text'}
-            ,{field:'job', title:'岗位', sort: true,edit: 'text'}
-            ,{field:'business', title:'公司',  sort: true,edit: 'text'}
-            ,{field:'wages', title:'工资',  sort: true,edit: 'text'}
+            {fixed: 'left',field:'id', title:'ID', sort: true,width:50}
+            ,{field:'images', title:'图片'}
+            ,{field:'beizhu', title:'备注',edit: 'text'}
+            ,{field:'time', title:'添加时间', sort: true,edit: 'text'}
             ,{fixed: 'right', title:'操作', toolbar: '#barDemo',width:120}
           ]]
           ,page: true
@@ -81,8 +78,8 @@
             });
           } else if(obj.event === 'del'){
             var data = obj.data;
-            layer.confirm('真的要删除'+data.name+'吗？', function(index){
-              $.post("/admin/index/index6del",{id:data.id});
+            layer.confirm('真的要删除'+data.beizhu+'吗？', function(index){
+              $.post("/admin/index/index61del",{id:data.id});
               obj.del();
               layer.close(index);
             });
@@ -96,7 +93,7 @@
           var value = obj.value //得到修改后的值
           ,data = obj.data //得到所在行所有键值
           ,field = obj.field; //得到字段
-          $.post("/admin/index/index6edit",
+          $.post("/admin/index/index61edit",
           {
             id:data.id,
             field:field,

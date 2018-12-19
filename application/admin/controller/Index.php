@@ -3,7 +3,9 @@ namespace app\admin\controller;
 use think\Controller;
 use app\admin\model\Webinfo;
 use app\admin\model\Index6;
+use app\admin\model\Index61;
 use app\admin\model\Article;
+use app\admin\model\Course;
 
 class Index extends Controller
 {
@@ -20,11 +22,11 @@ class Index extends Controller
         if (!session('?admin_id')) {
             return view("login");
         }
-    	$webinfo = Webinfo::find();
-    	$this->assign("webtitle",$webinfo->webtitle);
-    	$this->assign("webkeywords",$webinfo->webkeywords);
-    	$this->assign("webdesc",$webinfo->webdesc);
-    	return view();
+        $webinfo = Webinfo::find();
+        $this->assign("webtitle",$webinfo->webtitle);
+        $this->assign("webkeywords",$webinfo->webkeywords);
+        $this->assign("webdesc",$webinfo->webdesc);
+        return view();
     }
 
     //登陆
@@ -85,10 +87,10 @@ class Index extends Controller
         if (!session('?admin_id')) {
             return view("login");
         }
-    	$webinfo = new Webinfo;
-		// 过滤post数组中的非数据表字段数据
-		$webinfo->save(input(''),['id' => 1]);
-		$this->success('更新成功');
+        $webinfo = new Webinfo;
+        // 过滤post数组中的非数据表字段数据
+        $webinfo->save(input(''),['id' => 1]);
+        $this->success('更新成功');
     }
 
     //首页一层
@@ -97,8 +99,8 @@ class Index extends Controller
         if (!session('?admin_id')) {
             return view("login");
         }
-    	$index1 = db('index1')->where('id',1)->value('desc');
-    	$this->assign("index1",$index1);
+        $index1 = db('index1')->where('id',1)->value('desc');
+        $this->assign("index1",$index1);
         return view();
     }
 
@@ -107,15 +109,15 @@ class Index extends Controller
         if (!session('?admin_id')) {
             return view("login");
         }
-    	db('index1')->update(['desc' => input('desc'),'id'=>1]);
-		$this->success('更新成功');
+        db('index1')->update(['desc' => input('desc'),'id'=>1]);
+        $this->success('更新成功');
     }
 
     public function index2(){
         if (!session('?admin_id')) {
             return view("login");
         }
-    	return view();
+        return view();
     }
 
     //修改logo
@@ -123,30 +125,30 @@ class Index extends Controller
         if (!session('?admin_id')) {
             return view("login");
         }
-    	// 获取表单上传文件 例如上传了001.jpg
-		$file = request()->file('logo');
-		// 移动到框架应用根目录/uploads/ 目录下
-		$info = $file->move( './static/picture');
-		if($info){
-			$getSaveName = str_replace("\\", "/",$info->getSaveName());
-			// 成功上传后 获取上传信息
-			db('index2')->update(['logopath' => $getSaveName,'id'=>1]);
-			// 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-			//echo $info->getSaveName();
-			// 输出 42a79759f284b767dfcb2a0197904287.jpg
-			//echo $info->getFilename();
-			$this->success('更新成功');
-		}else{
-			// 上传失败获取错误信息
-			echo $file->getError();
-		}
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('logo');
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            db('index2')->update(['logopath' => $getSaveName,'id'=>1]);
+            // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
+            //echo $info->getSaveName();
+            // 输出 42a79759f284b767dfcb2a0197904287.jpg
+            //echo $info->getFilename();
+            $this->success('更新成功');
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
     }
 
     public function index3(){
         if (!session('?admin_id')) {
             return view("login");
         }
-    	return view();
+        return view();
     }
 
     //修改轮播
@@ -154,25 +156,25 @@ class Index extends Controller
         if (!session('?admin_id')) {
             return view("login");
         }
-    	//分别是哪个ban图
-    	$name = input('name');
-    	// 获取表单上传文件 例如上传了001.jpg
-		$file = request()->file($name);
-		// 移动到框架应用根目录/uploads/ 目录下
-		$info = $file->move( './static/picture');
-		if($info){
-			$getSaveName = str_replace("\\", "/",$info->getSaveName());
-			// 成功上传后 获取上传信息
-			db('index3')->update([$name => $getSaveName,'id'=>1]);
-			// 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-			//echo $info->getSaveName();
-			// 输出 42a79759f284b767dfcb2a0197904287.jpg
-			//echo $info->getFilename();
-			$this->success('更新成功');
-		}else{
-			// 上传失败获取错误信息
-			echo $file->getError();
-		}
+        //分别是哪个ban图
+        $name = input('name');
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file($name);
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            db('index3')->update([$name => $getSaveName,'id'=>1]);
+            // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
+            //echo $info->getSaveName();
+            // 输出 42a79759f284b767dfcb2a0197904287.jpg
+            //echo $info->getFilename();
+            $this->success('更新成功');
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
     }
 
     //开班信息
@@ -243,12 +245,89 @@ EOF;
         $this->success('更新成功');
     }
 
-    //就业学员
-    public function index6view(){
+    //教学风采
+    public function index61view($page=1,$limit=10){
         if (!session('?admin_id')) {
             return view("login");
         }
-        $students = Index6::select();
+        $jxfc = Index61::limit(($page-1)*$limit,$limit)->order('time desc')->select();
+        $jxfc = json_encode($jxfc);
+        $rows = Index61::count();
+        $jxfc = '{"code": 0,"msg": "","count": '.$rows.',"data":'.$jxfc.'}';
+        echo $jxfc;
+    }
+
+    public function index61(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        return view();
+    }
+
+    //新增教学风采
+    public function index61add(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        return view();
+    }
+
+    //新增教学风采
+    public function index61insert(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('img');
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            $data = ['img' => $getSaveName,'beizhu' => input('beizhu'),'time'=>date("Y-m-d"),'id'=>input('id')];
+            db('index61')->insert($data);
+            $this->success('新增成功',"/admin/index/index61");
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
+    }
+
+    //删除教学风采
+    public function index61del(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        Index61::destroy(input('id'));
+    }
+
+    //学员单元格编辑
+    public function index61edit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        $id = input('id');
+        $field = input('field');
+        $value = input('value');
+
+        $user = new index61;
+        $oldvalue = $user ->find($id)->$field;
+        //过滤post数组中的非数据表字段数据
+        $m = $user->save([$field=>$value], ['id' => $id]);
+
+        if ($m) {
+            echo "更新成功";
+        }else{
+            echo "更新失败";
+        }
+    }
+
+    //就业学员
+    public function index6view($page=1,$limit=10){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        $students = Index6::limit(($page-1)*$limit,$limit)->select();
         $rows = Index6::count();
         $students = json_encode($students);
         $students = '{"code": 0,"msg": "","count": '.$rows.',"data":'.$students.'}';
@@ -438,11 +517,11 @@ EOF;
     }
 
     //文章列表
-    public function articlelistview(){
+    public function articlelistview($page=1,$limit=10){
         if (!session('?admin_id')) {
             return view("login");
         }
-        $articlelist = Article::order('time desc')->select();
+        $articlelist = Article::limit(($page-1)*$limit,$limit)->order('time desc')->select();
         $rows = Article::count();
         $articlelist = json_encode($articlelist);
         $articlelist = '{"code": 0,"msg": "","count": '.$rows.',"data":'.$articlelist.'}';
@@ -510,6 +589,114 @@ EOF;
             $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
             db('article')->update($data);
             $this->success('更新成功',"/admin/index/articlelist");
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
+    }
+
+    //添加课程
+    public function courseadd(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        return view();
+    }
+
+    //添加课程
+    public function courseedit(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('poster');
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d")];
+            db('course')->insert($data);
+            $this->success('新增成功',"/admin/index/courselist");
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();
+        }
+    }
+
+    //课程列表
+    public function courselistview($page=1,$limit=10){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        $courselist = Course::limit(($page-1)*$limit,$limit)->order('time desc')->select();
+        $rows = Course::count();
+        $courselist = json_encode($courselist);
+        $courselist = '{"code": 0,"msg": "","count": '.$rows.',"data":'.$courselist.'}';
+        echo $courselist;
+    }
+
+    //删除课程
+    public function coursedel(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        Course::destroy(input('id'));
+    }
+
+    //文章单元格编辑
+    public function courseedit1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        $id = input('id');
+        $field = input('field');
+        $value = input('value');
+
+        $user = new Course;
+        $oldvalue = $user ->find($id)->$field;
+        //过滤post数组中的非数据表字段数据
+        $m = $user->save([$field=>$value], ['id' => $id]);
+
+        if ($m) {
+            echo "更新成功";
+        }else{
+            echo "更新失败";
+        }
+    }
+
+    public function courselist(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        return view();
+    }
+
+    //课程更新
+    public function courseupdate($id){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        $course = db('course')->find($id);
+        $this->assign("course",$course);
+        return view();
+    }
+
+    //课程更新
+    public function courseupdate1(){
+        if (!session('?admin_id')) {
+            return view("login");
+        }
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('poster');
+        // 移动到框架应用根目录/uploads/ 目录下
+        $info = $file->move( './static/picture');
+        if($info){
+            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+            // 成功上传后 获取上传信息
+            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
+            db('course')->update($data);
+            $this->success('更新成功',"/admin/index/courselist");
         }else{
             // 上传失败获取错误信息
             echo $file->getError();
