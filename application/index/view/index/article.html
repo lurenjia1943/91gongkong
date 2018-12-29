@@ -1,5 +1,20 @@
 ﻿{include file="index/head" /}
 <link rel="stylesheet" type="text/css" href="/static/css/screen.min.css">
+<style type="text/css">
+    .news-list .article-footer{
+        text-align: center;
+        border-top: 0;
+    }
+
+    .news-list .our-news-item{
+        margin: 0;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .our-news-item h4{
+        color: #0ba1e4;
+        height: 25px;
+    }
+</style>
 <!-- <link rel="stylesheet" type="text/css" href="/static/css/common.css"> -->
 <div class="gs_bottom3" style="height:293px;background-image: url('/static/picture/promo_banner_bg_01.jpg')"></div>
 <div style="clear:both"></div>
@@ -15,23 +30,29 @@
 </div>
 <main class="packages-list-container" id="all-packages">
     <div class="container">
-        <div class="list-group packages col-xs-9" id="common-packages">
+        <div class="col-xs-9 news-list">
             {volist name='article' id='vo'}
-            <a href="/index/index/articlelist?id={$vo.id}" class="package list-group-item">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <img src="/static/picture/{$vo.poster}" height="100px" width="133px">
+            <div class="media our-news-item">
+                <div class="media-left">
+                    <a class="thumbnail" href="/index/index/articlelist?id={$vo.id}">
+                        <img class="media-object" src="/static/picture/{$vo.poster}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href="/index/index/articlelist?id={$vo.id}"><h4 class="media-heading">{$vo.title}</h4></a>
+                    <div class="dynamic-li">
+                        <b></b><em class="pic-glob"></em><span>时间：{$vo.time} </span>
                     </div>
-                    <div class="col-xs-9 hidden-xs">
-                        <h4>{$vo.title}</h4>
-                        <div style="float: right;font-size: 10px">发表于 {$vo.time}</div>
+                    <p>{$vo.text}</p>
+                    <div class="dynamic-li">
+                        <a href="/index/index/articlelist?id={$vo.id}">[详细]</a>
                     </div>
                 </div>
-            </a>
-            <br>
+            </div>
             {/volist}
             {$article->render()}
         </div>
+        <p class="hidden-xs" id="right-line"></p>
         <aside class="col-xs-3 sidebar">
             <div class="widget">
                 <h4 class="title">公众号</h4>

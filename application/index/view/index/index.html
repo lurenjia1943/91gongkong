@@ -163,15 +163,51 @@
                                         <span>多年开发工作经验全给你</span>
                                         {foreach $index5 as $key=>$vo }
                                         <div class="lhjf2 mouse">
-                                            <div class="lhjf21"></div>
-                                            <div class="lhjf3"><img src="/static/picture/{$vo.img}" class="img-circle"></div>
-                                                <strong class="lhjf4" style="display:block;">{$vo.name}</strong>
-                                                <p class="lhjf5" style="display:block;">{$vo.desc}</p>
-                                            </div>
-                                            {/foreach}
+                                        <div class="lhjf21"></div>
+                                        <div class="lhjf3"><img src="/static/picture/{$vo.img}" class="img-circle"></div>
+                                            <strong class="lhjf4" style="display:block;">{$vo.name}</strong>
+                                            <p class="lhjf5" style="display:block;">{$vo.desc}</p>
+                                        </div>
+                                        {/foreach}
                                         </div>
                                     </div>
                                     <div style="clear:both"></div>
+                                    <!-- 学院动态 -->
+                                    <!-- 最新资讯 -->
+                                    <div class="index-row our-news">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="lhjf1">
+                                                    <strong class="lhje1">News</strong>
+                                                    <strong class="lhje2"><a name="a2"><a name="a3">最新资讯</a></a></strong>
+                                                    <hr />
+                                                    <span>学院最新动态</span>
+                                                </div>
+                                                {volist name='article' id='vo'}
+                                                <div class="col-xs-6">
+                                                    <div class="media our-news-item">
+                                                        <div class="media-left">
+                                                            <a class="thumbnail" href="/index/index/articlelist?id={$vo.id}">
+									                            <img class="media-object" src="/static/picture/{$vo.poster}" style="height: 100px;width: 130px">
+									                        </a>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <a href="/index/index/articlelist?id={$vo.id}"><h4 class="media-heading">{$vo.title}</h4></a>
+                                                            <div class="dynamic-li">
+                                                                <span>时间：{$vo.time} </span>
+                                                            </div>
+                                                            <p>{$vo.text}</p>
+                                                            <div class="dynamic-li">
+                                                                <a href="/index/index/articlelist?id={$vo.id}">[详细]</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {/volist}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>        
                                     <!-- 教学风采 -->
                                     <script type="text/javascript">
                                     $.fn.imgAutoResizer2 = function(options) {

@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Controller;
 use app\admin\model\Webinfo;
+use app\admin\model\Article;
 
 class Index extends Controller
 {
@@ -18,6 +19,7 @@ class Index extends Controller
         $index61 = db('index61')->order('time desc')->select();
         $index7 = db('index7')->find();
         $index8 = db('index8')->find();
+        $article = Article::order('time desc')->limit(4)->select();
     	//基本信息
     	$this->assign("webtitle",$webinfo->webtitle);
     	$this->assign("webkeywords",$webinfo->webkeywords);
@@ -35,6 +37,7 @@ class Index extends Controller
         $this->assign("index61",$index61);
         $this->assign("index7",$index7);
         $this->assign("index8",$index8);
+        $this->assign("article",$article);
         return view();
     }
 
@@ -47,8 +50,8 @@ class Index extends Controller
         $index2 = db('index2')->where('id',1)->value('logopath');
         $index3 = db('index3')->where('id',1)->find();
         $index8 = db('index8')->find();
-        $article = db('article')->order('time desc')->paginate(6);
-        $list = db('article')->order('time desc')->limit(8)->select();
+        $article = Article::order('time desc')->paginate(6);
+        $list = Article::order('time desc')->limit(8)->select();
         //基本信息
         $this->assign("webtitle",$webinfo->webtitle);
         $this->assign("webkeywords",$webinfo->webkeywords);
