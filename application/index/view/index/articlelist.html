@@ -5,7 +5,7 @@
         line-height: 25px;
     }
 </style>
-<div class="gs_bottom3" style="height:293px;background-image: url('/static/picture/promo_banner_bg_01.jpg')"></div>
+<div class="gs_bottom3" style="height:293px;background-image: url('/static/picture/{$navimg}')"></div>
 <div style="clear:both"></div>
 <div class="container">
     <div class="row">
@@ -19,30 +19,14 @@
 </div>
 <main class="packages-list-container" id="all-packages">
     <div class="container">
-        <div class="col-xs-9 blog-main">
+        <div class="col-xs-9 blog-main" style="border-right: 1px solid #c0c0c0">
             <div class="blog-post">
                 <h2 class="blog-post-title">{$article.title}</h2>
                 <p class="blog-post-meta">发表时间：{$article.time}</p>
                 {$article.editorValue}
             </div>
         </div>
-        <aside class="col-xs-3 sidebar">
-            <div class="widget">
-                <h4 class="title">公众号</h4>
-                <div class="content community">
-                    <img src="/static/picture/{$index8.img}" height="200px" width="200px">
-                </div>
-                </div>
-                <div class="widget"><h4 class="title">最新开班时间</h4>
-                    <h5 style="color: red">2018年3月5日 西门子全科班 名额已不多 火热报名中...</h5>
-                </div>
-                <div class="widget">
-                    <h4 class="title">最新动态</h4>
-                    {foreach $list as $key=>$vo }
-                    <a href="/index/index/articlelist?id={$vo.id}" class="btn btn-default btn-block">{$vo.title|mb_substr=0,10}......</a>
-                    {/foreach}
-                </div>
-        </aside>
+        {include file="index/right" /}
         <div class="list-group packages" id="search-results" style="display: none"></div>
     </div>
 </main>

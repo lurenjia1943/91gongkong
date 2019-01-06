@@ -22,39 +22,21 @@
   
   <body>
     <div class="x-body layui-anim layui-anim-up">
-        <form class="layui-form" action="/admin/index/webinfoedit" method="post">
+        <form class="layui-form" action="/admin/index/navimg" method="post" enctype="multipart/form-data">
           <div class="layui-form-item">
               <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>网站名称
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="webtitle" required="" lay-verify="webtitle"
-                  autocomplete="off" class="layui-input" value="{$webtitle}">
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>网站关键字
+                  <span class="x-red">*</span>导航图片
               </label>
               <div class="layui-input-block">
-                  <textarea placeholder="请输入内容" class="layui-textarea" name="webkeywords">{$webkeywords}</textarea>
-                  <br>
-                  <span class="x-red">关键字用于搜索引擎抓取，多个关键字中间使用英文逗号隔开。</span>
+                  <input type="file" id="L_username" name="navimg">
               </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>网站描述
-              </label>
-              <div class="layui-input-block">
-                  <textarea placeholder="请输入内容" class="layui-textarea" name="webdesc">{$webdesc}</textarea>
-              </div>
+
           </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  修改
+                  上传
               </button>
           </div>
       </form>

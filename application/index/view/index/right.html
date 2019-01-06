@@ -1,0 +1,17 @@
+<aside class="col-xs-3 sidebar">
+    <div class="widget">
+    <h4 class="title">公众号</h4>
+    <div class="content community">
+        <img src="/static/picture/{$index8.img}" height="200px" width="200px">
+                                    </div>
+    </div>
+    <div class="widget"><h4 class="title">最新开班时间</h4>
+        <h5 style="color: red">{$index1}</h5>
+    </div>
+    <div class="widget">
+        <h4 class="title">最新动态</h4>
+        {foreach $list as $key=>$vo }
+        <a href="/index/index/courselist?id={$vo.id}" class="btn btn-default btn-block text-left">{$vo.title|mb_substr=0,10}......</a>
+        {/foreach}
+    </div>
+</aside>
