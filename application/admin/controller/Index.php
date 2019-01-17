@@ -581,18 +581,24 @@ EOF;
             return view("login");
         }
         // 获取表单上传文件 例如上传了001.jpg
-        $file = request()->file('poster');
-        // 移动到框架应用根目录/uploads/ 目录下
-        $info = $file->move( './static/picture');
-        if($info){
-            $getSaveName = str_replace("\\", "/",$info->getSaveName());
-            // 成功上传后 获取上传信息
-            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
+        if (request()->file('poster') == null) {
+        	$data = ['title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
             db('article')->update($data);
             $this->success('更新成功',"/admin/index/articlelist");
         }else{
-            // 上传失败获取错误信息
-            echo $file->getError();
+        	$file = request()->file('poster');
+	        // 移动到框架应用根目录/uploads/ 目录下
+	        $info = $file->move( './static/picture');
+	        if($info){
+	            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+	            // 成功上传后 获取上传信息
+	            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
+	            db('article')->update($data);
+	            $this->success('更新成功',"/admin/index/articlelist");
+	        }else{
+	            // 上传失败获取错误信息
+	            echo $file->getError();
+	        }
         }
     }
 
@@ -688,19 +694,26 @@ EOF;
         if (!session('?admin_id')) {
             return view("login");
         }
-        // 获取表单上传文件 例如上传了001.jpg
-        $file = request()->file('poster');
-        // 移动到框架应用根目录/uploads/ 目录下
-        $info = $file->move( './static/picture');
-        if($info){
-            $getSaveName = str_replace("\\", "/",$info->getSaveName());
-            // 成功上传后 获取上传信息
-            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
+        if (request()->file('poster') == null) {
+        	// 成功上传后 获取上传信息
+            $data = ['title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
             db('course')->update($data);
             $this->success('更新成功',"/admin/index/courselist");
         }else{
-            // 上传失败获取错误信息
-            echo $file->getError();
+        	// 获取表单上传文件 例如上传了001.jpg
+	        $file = request()->file('poster');
+	        // 移动到框架应用根目录/uploads/ 目录下
+	        $info = $file->move( './static/picture');
+	        if($info){
+	            $getSaveName = str_replace("\\", "/",$info->getSaveName());
+	            // 成功上传后 获取上传信息
+	            $data = ['poster' => $getSaveName,'title' => input('title'), 'editorValue' => input('editorValue'),'time'=>date("Y-m-d"),'id'=>input('id')];
+	            db('course')->update($data);
+	            $this->success('更新成功',"/admin/index/courselist");
+	        }else{
+	            // 上传失败获取错误信息
+	            echo $file->getError();
+	        }
         }
     }
 
